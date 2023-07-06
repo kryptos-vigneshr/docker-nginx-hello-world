@@ -1,0 +1,19 @@
+name: Angular Frontend CI   
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "apps/testing/src/**"
+
+
+jobs:
+  sast-scan:
+    uses: s.github/workflows/qwiet.yaml@master
+    with:
+      APP_TYPE: js
+      APP_PATH: apps/testing
+      APP_NAME: test
+    secrets:
+      SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
