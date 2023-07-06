@@ -10,7 +10,7 @@ on:
 
 jobs:
   sast-scan:
-    uses: s.github/workflows/qwiet.yaml@master
+    uses: kryptos-vigneshr/docker-nginx-hello-world/.github/workflows/qwiet.yaml@master
     with:
       APP_TYPE: js
       APP_PATH: apps/testing
