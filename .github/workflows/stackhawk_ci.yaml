@@ -1,55 +1,55 @@
-name: stackhawk Image Scanning
+# name: stackhawk Image Scanning
 
-on:
-  workflow_call:
+# on:
+#   workflow_call:
       
-    secrets:
+#     secrets:
 
-      AWS_ACCESS_KEY_ID: #AWS access key id
-        required: true
+#       AWS_ACCESS_KEY_ID: #AWS access key id
+#         required: true
 
-      AWS_SECRET_ACCESS_KEY:  # AWS Secret access key
-        required: true
+#       AWS_SECRET_ACCESS_KEY:  # AWS Secret access key
+#         required: true
       
-      AWS_REGION: #AWS Account region
-        required: true
+#       AWS_REGION: #AWS Account region
+#         required: true
         
-      AWS_ECR_REGISTRY_URL:  # AWS ECR URL
-        required: true
+#       AWS_ECR_REGISTRY_URL:  # AWS ECR URL
+#         required: true
 
-      AWS_IMAGE_URL:  # AWS ECR image URL 
-        required: true
+#       AWS_IMAGE_URL:  # AWS ECR image URL 
+#         required: true
 
-  push:
-    branches:
-      - master
-  pull_request:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
 
-jobs:
-  build:
-    runs-on: ubuntu-20.04
-    steps:
+# jobs:
+#   build:
+#     runs-on: ubuntu-20.04
+#     steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
           
-      - name: Run aws image login 
-        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URL }}
+#       - name: Run aws image login 
+#         run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REGISTRY_URL }}
         
-      - name: Docker run
-        run: docker run -d ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_IMAGE_URL }}
+#       - name: Docker run
+#         run: docker run -d ${{ secrets.AWS_ECR_REGISTRY_URL }}/${{ secrets.AWS_IMAGE_URL }}
         
-      - name: Docker list
-        run: docker ps -a
+#       - name: Docker list
+#         run: docker ps -a
         
-      - name: Run HawkScan
-        uses: stackhawk/hawkscan-action@v2
-        with:
-          apiKey: ${{ secrets.HAWK_API_KEY }}
+#       - name: Run HawkScan
+#         uses: stackhawk/hawkscan-action@v2
+#         with:
+#           apiKey: ${{ secrets.HAWK_API_KEY }}
