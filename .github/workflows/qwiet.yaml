@@ -34,20 +34,29 @@ jobs:
       with:
         java-version: 11
         distribution: 'adopt'
-
-    - name: Analyze demo app JS with Qwiet
+        
+    - name: Analyze Java Application with Qwiet
+      working-directory: ${{ inputs.APP_PATH }}
+      if: inputs.APP_TYPE == 'java'
+      run: |
+        mvn clean install
+        ${{ github.workspace }}/qwiet analyze --java --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --vcs-prefix-correction "*=/src/main/java" --wait ./${{ inputs.APP_NAME }}/target/${{ inputs.APP_NAME }}.jar
+      env:
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.QWIET_CI_TOKEN }}
+        
+    - name: Analyze JS with Qwiet
       working-directory: ${{ inputs.APP_PATH }}
       if: inputs.APP_TYPE == 'js'
-      run: ${{ github.workspace }}/shiftleft analyze  --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --js .
+      run: ${{ github.workspace }}/qwiet analyze --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --js .
       env:
-        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.QWIET_CI_TOKEN }}
 
     - name: Report export process
       working-directory: ${{ inputs.APP_PATH }}
-      run: ${{ github.workspace }}/shiftleft analyze --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report-file /app/report.txt
+      run: ${{ github.workspace }}/qwiet analyze --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report-file /app/report.txt
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
     - name: echo
       working-directory: ${{ inputs.APP_PATH }}
-      run: cat myreport.json
+      run: cat report.txt
