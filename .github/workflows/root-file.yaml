@@ -6,8 +6,7 @@ on:
       - master
     paths:
       - "app/src/main/**"
-      - ".github/workflows/**"
-      - "*"
+      - ".github/workflows/root-file.yaml"
 
 jobs:
   sast-scan:
