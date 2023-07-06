@@ -1,5 +1,5 @@
 name: Angular Frontend CI   
-  
+
 on:
   push:
     branches:
