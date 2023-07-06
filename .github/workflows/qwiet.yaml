@@ -38,16 +38,16 @@ jobs:
     - name: Analyze demo app JS with Qwiet
       working-directory: ${{ inputs.APP_PATH }}
       if: inputs.APP_TYPE == 'js'
-      run: ${{ github.workspace }}/qwiet analysis --v2 --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --js .
+      run: ${{ github.workspace }}/qwiet check-analyze --v2 --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --js .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
     - name: Report export process
       working-directory: ${{ inputs.APP_PATH }}
-      run: ${{ github.workspace }}/qwiet analysis --v2 --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report-file .
+      run: ${{ github.workspace }}/qwiet check-analyze --v2 --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report-file=myreport.json
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
     - name: echo
       working-directory: ${{ inputs.APP_PATH }}
-      run: ls
+      run: cat myreport.json
