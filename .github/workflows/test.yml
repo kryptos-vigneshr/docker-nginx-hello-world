@@ -1,19 +1,19 @@
-name: Parent Workflow
+# name: Parent Workflow
 
-on:
-  workflow_run:
-    workflows: ["Trivy Image Scanning"]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: ["Trivy Image Scanning"]
+#     types:
+#       - completed
 
-jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+# jobs:
+#   main:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Run Child Workflow
-        uses: ./.github/workflows/main.yml
-        with:
-          input_parameter: "example value"
+#       - name: Run Child Workflow
+#         uses: ./.github/workflows/main.yml
+#         with:
+#           input_parameter: "example value"
