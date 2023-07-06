@@ -5,15 +5,14 @@ on:
     branches:
       - master
     paths:
-      - "apps/testing/src/**"
-
+      - "app/src/main/**"
 
 jobs:
   sast-scan:
     uses: kryptos-vigneshr/docker-nginx-hello-world/.github/workflows/qwiet.yaml@master
     with:
       APP_TYPE: js
-      APP_PATH: apps/testing
+      APP_PATH: app/
       APP_NAME: test
     secrets:
       SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
