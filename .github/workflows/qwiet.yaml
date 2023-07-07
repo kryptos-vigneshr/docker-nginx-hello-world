@@ -52,7 +52,7 @@ jobs:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
     - name: Report export process
-      run: ${{ github.workspace }}/qwiet check-analysis --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report ${{ inputs.APP_PATH }}/report.json
+      run: ${{ github.workspace }}/qwiet check-analysis --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report-file ${{ inputs.APP_PATH }}/report.json
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
@@ -60,4 +60,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: shiftleft-report
-        path: ${{ inputs.APP_PATH }}/report.json
+        path: ${{ inputs.APP_PATH }}
