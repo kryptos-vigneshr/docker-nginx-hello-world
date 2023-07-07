@@ -53,7 +53,7 @@ jobs:
         
     - name: Report export process
       id: sast-results
-      run: ${{ github.workspace }}/qwiet analyze --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --config ./shiftleft.yml --report
+      run: ${{ github.workspace }}/qwiet analyze --app ${{ inputs.APP_NAME }} --tag branch=${{ github.head_ref }} --report
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
