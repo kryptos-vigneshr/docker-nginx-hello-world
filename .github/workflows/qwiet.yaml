@@ -56,6 +56,8 @@ jobs:
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
-    - name: echo
-      working-directory: ${{ inputs.APP_PATH }}
-      run: cat report.txt
+    - name: Upload ShiftLeft SAST report
+      uses: actions/upload-artifact@v2
+      with:
+        name: shiftleft-report
+        path: report.json
