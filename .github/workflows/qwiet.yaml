@@ -47,13 +47,13 @@ jobs:
     - name: Analyze JS with Qwiet
       working-directory: ${{ inputs.APP_PATH }}
       if: inputs.APP_TYPE == 'js'
-      run: ${{ github.workspace }}/sl-latest check-analysis --app ${{ inputs.APP_NAME }} --config ~/shiftleft.yml --branch=${{ github.head_ref }} --js .  
+      run: ${{ github.workspace }}/qwiet-latest check-analysis --app ${{ inputs.APP_NAME }} --config ~/shiftleft.yml --branch=${{ github.head_ref }} --js .  
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
     - name: Report export process
       id: sast-results
-      run: ${{ github.workspace }}/sl-latest check-analysis --branch=${{ github.head_ref }} --config ~/shiftleft.yml --app ${{ inputs.APP_NAME }} --report-file ./sast-scan.json 
+      run: ${{ github.workspace }}/qwiet-latest check-analysis --branch=${{ github.head_ref }} --config ~/shiftleft.yml --app ${{ inputs.APP_NAME }} --report-file ./sast-scan.json 
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
