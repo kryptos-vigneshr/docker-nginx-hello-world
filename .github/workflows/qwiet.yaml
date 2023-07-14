@@ -67,7 +67,9 @@ jobs:
       
     - name: drata scan report send
       working-directory: ${{ inputs.Drata_Directory }}
-      run: bash ./drata-script.sh
+      run: |
+        chmod +x drata-script.sh
+        ./drata-script.sh
       
       
  
