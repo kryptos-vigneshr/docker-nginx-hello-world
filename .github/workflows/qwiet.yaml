@@ -61,3 +61,7 @@ jobs:
     - name: Output
       working-directory: ${{ inputs.APP_PATH }}
       run: cat sast-report.json
+      
+    - name: convert report to pdf
+      working-directory: ${{ inputs.APP_PATH }}
+      run: sudo apt-get install jq && sudo apt-get install pandoc && cat sast-report.json | jq '.' | pandoc -f json -o sastscan_report.pdf
