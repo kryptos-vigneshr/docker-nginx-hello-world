@@ -54,14 +54,12 @@ jobs:
     - name: Report export process
       id: sast-results
       working-directory: ${{ inputs.APP_PATH }}
-      run: ${{ github.workspace }}/qwiet check-analysis --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report --report-file ./sast-report.json --config ./shiftleft.yml
+      run: ${{ github.workspace }}/qwiet check-analysis --branch=${{ github.head_ref }} --app ${{ inputs.APP_NAME }} --report --report-file ./sast-report.pdf --config ./shiftleft.yml
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
 
     - name: Output
       working-directory: ${{ inputs.APP_PATH }}
-      run: cat sast-report.json
+      run: cat sast-report.pdf
       
-    - name: convert report to pdf
-      working-directory: ${{ inputs.APP_PATH }}
-      run: sudo apt-get install jq && sudo apt-get install pandoc && cat sast-report.json | jq '.' | pandoc -f json -o sastscan_report.pdf
+ 
