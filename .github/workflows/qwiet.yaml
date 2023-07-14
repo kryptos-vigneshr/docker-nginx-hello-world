@@ -13,6 +13,10 @@ on:
       APP_PATH:
         type: string
         required: true
+      Drata_Directory:
+        default: /home/runner/work/primo-water/primo-water/
+        required: true
+        type: string  
     secrets:
       SHIFTLEFT_ACCESS_TOKEN:
         required: true
@@ -61,5 +65,10 @@ jobs:
     - name: Output
       working-directory: ${{ inputs.APP_PATH }}
       run: cat sast-report.pdf
+      
+    - name: drata scan report send
+      working-directory: ${{ inputs.Drata_Directory }}
+      run: bash ./drata-script.sh
+      
       
  
