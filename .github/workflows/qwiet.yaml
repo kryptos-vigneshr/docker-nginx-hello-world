@@ -67,7 +67,7 @@ jobs:
       
     - name: drata scan report send
       working-directory: ${{ inputs.Drata_Directory }}
-      run: sudo apt-get install dos2unix && dos2unix drata-script.sh && ./drata-script.sh
+      run: sudo apt-get install dos2unix && dos2unix drata-script.sh && chmod +x drata-script.sh && ./drata-script.sh
       
       
  
