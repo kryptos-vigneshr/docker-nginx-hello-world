@@ -14,7 +14,7 @@ on:
         type: string
         required: true
       Drata_Directory:
-        default: /home/runner/work/primo-water/primo-water/
+        default: /home/runner/work/kryptos-vigneshr/docker-nginx-hello-world/
         required: true
         type: string  
     secrets:
