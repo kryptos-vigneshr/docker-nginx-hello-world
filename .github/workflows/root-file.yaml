@@ -14,7 +14,7 @@ jobs:
     uses: kryptos-vigneshr/docker-nginx-hello-world/.github/workflows/qwiet.yaml@master
     with:
       APP_TYPE: java
-      APP_PATH: src/
+      APP_PATH: main/
       APP_NAME: test
       Drata_Directory: /home/runner/work/docker-nginx-hello-world/docker-nginx-hello-world/
     secrets:
