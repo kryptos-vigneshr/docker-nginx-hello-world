@@ -13,8 +13,8 @@ jobs:
   sast-scan:
     uses: kryptos-vigneshr/docker-nginx-hello-world/.github/workflows/qwiet.yaml@master
     with:
-      APP_TYPE: js
-      APP_PATH: app/
+      APP_TYPE: java
+      APP_PATH: src/
       APP_NAME: test
       Drata_Directory: /home/runner/work/docker-nginx-hello-world/docker-nginx-hello-world/
     secrets:
